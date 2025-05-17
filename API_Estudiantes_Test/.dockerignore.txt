@@ -25,8 +25,8 @@
 README.md
 
 # Ignorar específicamente el proyecto Windows Forms
-ControlEscolar/
-ControlEscolar.Tests/
+Alumnos-tem2/
+Alumnos-tem2.Tests/
 # Cualquier otro proyecto específico de Windows que no sea necesario para la API
 
 # Ignorar archivos de desarrollo
