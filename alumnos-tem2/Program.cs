@@ -2,6 +2,8 @@ using alumnos_tem2.View;
 using NLog;
 using alumnos_tem2.Utilities;
 using OfficeOpenXml;
+using ControlEscolarCore.Controller;
+using ControlEscolarCore.Data;
 
 namespace alumnos_tem2
 {

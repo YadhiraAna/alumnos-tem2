@@ -10,6 +10,7 @@ using ControlEscolarCore.Utilities;
 using System.Configuration;
 using System.Data;
 using System.Security.Cryptography.X509Certificates;
+using System.Data.Common;
 
 namespace ControlEscolarCore.Data
 {
@@ -22,26 +23,64 @@ namespace ControlEscolarCore.Data
     {
         private static readonly Logger _logger = LoggingManager.GetLogger("alumnos_tem2.Data.PostgreeSQLDataAccess");
         //cadena de conexion desde Ap.cpnfig
-        private static readonly string _ConnectionString = ConfigurationManager.ConnectionStrings["ConexionBD"].ConnectionString;
+        //private static readonly string _ConnectionString = ConfigurationManager.ConnectionStrings["ConexionBD"].ConnectionString;
         //le indiica al dataacces donde esta la cadena de conexion que esta appConfig
-
-
         private NpgsqlConnection _conecction;
         private static PostgreSQLDataAccess? _instance;
         //para crear solo una instancias y no tenerlas repertidas
-
+        // Campo estático para almacenar la cadena de conexión
+        private static string _connectionString;
         //constrauctor
-        private PostgreSQLDataAccess()
+        /*private PostgreSQLDataAccess()
         {
             try
             {
-                _conecction = new NpgsqlConnection(_ConnectionString);
+                _conecction = new NpgsqlConnection(_connectionString);
                 _logger.Info("instancia de acceso a datos creada correctamente");
             }
             catch (Exception ex)
             {
                 _logger.Fatal(ex, "Error al inicializar el acceso a la base dde datos");
                 throw;//para informar el error, pasa el error aotro lado
+            }
+        }*/
+        // Propiedad para establecer la cadena de conexión desde el API
+        public static string ConnectionString
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_connectionString))
+                {
+                    try
+                    {
+                        // Intenta obtener desde ConfigurationManager (Windows Forms)
+                        _connectionString = ConfigurationManager.ConnectionStrings["ConexionBD"]?.ConnectionString;
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.Warn(ex, "No se pudo obtener la cadena de conexión desde ConfigurationManager");
+                    }
+                }
+                return _connectionString;
+            }
+            set { _connectionString = value; }
+        }
+        private PostgreSQLDataAccess()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(ConnectionString))
+                {
+                    throw new InvalidOperationException("La cadena de conexión no está configurada. Asegúrate de establecer PostgreSQLDataAccess.ConnectionString antes de usar la clase.");
+                }
+
+                _conecction = new NpgsqlConnection(ConnectionString);
+                _logger.Info("Instancia de acceso a datos creada correctamente");
+            }
+            catch (Exception ex)
+            {
+                _logger.Fatal(ex, "Error al inicializar el acceso a la base de datos");
+                throw;
             }
         }
         //solo tener una instancia
