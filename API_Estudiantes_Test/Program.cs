@@ -14,6 +14,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Agregamos el controller de Estudiantes
+builder.Services.AddScoped<EstudiantesController>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
