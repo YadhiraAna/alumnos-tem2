@@ -6,6 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Configurar la cadena de conexión para PostgreSQLDataAccess
 PostgreSQLDataAccess.ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+// Configurar para usar el puerto asignado por Render
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+builder.WebHost.UseUrls($"http://*:{port}");
+
+
 // Add services to the container.
 
 builder.Services.AddControllers();
