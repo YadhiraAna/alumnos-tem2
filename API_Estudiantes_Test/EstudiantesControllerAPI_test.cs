@@ -9,7 +9,7 @@ namespace API_Estudiantes_Test
     {
         //son objetos
         [ApiController]//
-        [Route("api / [Controller]")]//diseñar una ruta de acceso entre ese algo va haver un DOMINIO /api/nombre del controlador
+        [Route("api/[Controller]")]//diseñar una ruta de acceso entre ese algo va haver un DOMINIO /api/nombre del controlador
 
         public class EstudiantesControllerAPI_test : ControllerBase
         {

@@ -6,7 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Configurar la cadena de conexión para PostgreSQLDataAccess
 PostgreSQLDataAccess.ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-
 // Add services to the container.
 
 builder.Services.AddControllers();
