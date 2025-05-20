@@ -10,7 +10,7 @@ namespace API_Estudiantes_Test
         //son objetos
         [ApiController]//
         [Route("api/[controller]")]//diseñar una ruta de acceso entre ese algo va haver un DOMINIO /api/nombre del controlador
-
+       
         public class EstudiantesControllerAPI_test : ControllerBase
         {
             //controller base marca los errores  en codigos 400,404,
@@ -52,8 +52,10 @@ namespace API_Estudiantes_Test
                 catch (Exception ex)
                 {
                     _logger.LogError(ex, "Error al obtener estudiantes");
-                    return StatusCode(500, "Error interno del servidor" + ex.Message);
-               //el error 500 hace referencia un error interno
+                    return StatusCode(500, "Error interno del servidor: " + ex.ToString());
+
+                    //returnStatusCode(500, "Error interno del servidor" + ex.Message);
+                    //el error 500 hace referencia un error interno
                 }
             }
         }
