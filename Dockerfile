@@ -1,14 +1,11 @@
-# Etapa de construcción
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copiar solo la carpeta API_Estudiantes_Test al contenedor
-COPY API_Estudiantes_Test ./API_Estudiantes_Test
+COPY . .
 
-# Publicar el proyecto apuntando a la ruta correcta
-RUN dotnet publish "API_Estudiantes_Test/API_Estudiantes_Test.csproj" -c Release -o /app/out
+RUN dotnet restore API_Estudiantes_Test/API_Estudiantes_Test.csproj
+RUN dotnet publish API_Estudiantes_Test/API_Estudiantes_Test.csproj -c Release -o /app/out
 
-# Etapa final
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 
