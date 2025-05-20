@@ -52,9 +52,7 @@ namespace API_Estudiantes_Test
                 catch (Exception ex)
                 {
                     _logger.LogError(ex, "Error al obtener estudiantes");
-                    return StatusCode(500, "Error interno del servidor: " + ex.ToString());
-
-                    //returnStatusCode(500, "Error interno del servidor" + ex.Message);
+                    return StatusCode(500, "Error interno del servidor" + ex.Message);
                     //el error 500 hace referencia un error interno
                 }
             }
