@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ControlEscolarCore.Controller;
 using Microsoft.AspNetCore.Mvc;//esta enfocado en web:
 
-namespace API_Estudiantes_Test
-{
+
     namespace API_Estudiantes_Test
     {
         //son objetos
@@ -57,5 +56,5 @@ namespace API_Estudiantes_Test
                 }
             }
         }
-    }
+    
 }
